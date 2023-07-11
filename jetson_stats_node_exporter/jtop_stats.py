@@ -15,11 +15,11 @@ class JtopObservable(object):
             "stats": self.jetson.stats,
             "board": self.jetson.board,
             "cpu": self.jetson.cpu,
-            "mem": self.jetson.ram,
+            "mem": self.jetson.memory,
             "gpu": self.jetson.gpu,
-            "iram": self.jetson.iram,
+            # "iram": self.jetson.iram,
             "pwr": self.jetson.power,
-            "swp": self.jetson.swap,
+            # "swp": self.jetson.swap,
             "tmp": self.jetson.temperature,
             "upt": self.jetson.uptime
         }
