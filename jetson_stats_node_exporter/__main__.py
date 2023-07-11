@@ -9,7 +9,7 @@ from .exporter import JetsonExporter
 from .logger import factory
 
 
-def start_exporter(port=9100, update_period=10, logfile_cleanup_interval_hours=24):
+def start_exporter(port=9100, update_period=1, logfile_cleanup_interval_hours=24):
     logger = factory(__name__)
     logger.info(f"Node exporter running on port {port}. Querying speed: {update_period}s. "
                 f"Cleanup frequency: {logfile_cleanup_interval_hours}")
