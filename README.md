@@ -1,4 +1,4 @@
-# Nvidia Jetson Prometheus Node Exporter (incl. GPU) - no including AGX Orin platform
+# Nvidia Jetson Prometheus Node Exporter (incl. GPU) - now including AGX Orin platform
 
 This project contains a node exporter variation building on jetson-stats (jtop) rather than tegrastats directly.
 We export the following metrics: 
