@@ -1,6 +1,7 @@
 import logging
 import sys
 
+
 def factory(name, level='DEBUG'):
     logger = logging.getLogger(name)
     handler = logging.StreamHandler(sys.stdout)

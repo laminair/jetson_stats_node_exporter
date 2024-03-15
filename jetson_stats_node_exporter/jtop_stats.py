@@ -4,10 +4,10 @@ from jtop import jtop
 
 class JtopObservable(object):
 
-    def __init__(self, interval=0.5):
+    def __init__(self, update_period=0.5):
         self.data = {}
 
-        with jtop(interval=interval) as jetson:
+        with jtop(interval=update_period) as jetson:
             self.jetson = jetson
 
     def read_stats(self):

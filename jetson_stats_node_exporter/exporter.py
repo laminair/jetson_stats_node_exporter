@@ -4,16 +4,16 @@ from .jtop_stats import JtopObservable
 
 
 class Jetson(object):
-    def __init__(self, interval=1):
+    def __init__(self, update_period=1):
 
-        if float(interval) < 0.5:
+        if float(update_period) < 0.5:
             raise BlockingIOError("Jetson Stats only works with 0.5s monitoring intervals and slower.")
 
-        self.jtop_observer = JtopObservable(interval=0.5)  # seconds. 0.5 sec Standard for jtop.
+        self.jtop_observer = JtopObservable(update_period=update_period)
         self.jtop_stats = {}
         self.disk = {}
         self.disk_units = "GB"
-        self.interval = interval
+        self.interval = update_period
 
     def update(self):
         self.jtop_stats = self.jtop_observer.read_stats()
@@ -22,8 +22,8 @@ class Jetson(object):
 
 class JetsonExporter(object):
 
-    def __init__(self, interval):
-        self.jetson = Jetson(interval)
+    def __init__(self, update_period):
+        self.jetson = Jetson(update_period)
         self.logger = factory(__name__)
         self.name = "Jetson"
 
