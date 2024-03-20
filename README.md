@@ -56,11 +56,13 @@ Place the following file in path `/etc/systemd/system/jetson-stats-node-exporter
 ```
 [Unit]
 Description=Jetson Stats GPU Node Exporter
-After=network.target
+After=multi-user.target
+Requires=jtop.service
 
 [Service]
 Type=simple
 Restart=on-failure
+RestartSec=10
 User=root
 Group=root
 ExecStart=/usr/bin/python3 -m jetson_stats_node_exporter
