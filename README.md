@@ -43,7 +43,7 @@ Manual installation (may require sudo privileges due to jetson-stats dependency)
 ## Running the exporter
 After installation the project is available as python module. Run it as follows:
 ```
-python3 -m jetson_node_exporter
+python3 -m jetson_stats_node_exporter
 ```
 
 This will spawn a prometheus node exporter service on port 9100 and you'll be able to scrape all statistics.
