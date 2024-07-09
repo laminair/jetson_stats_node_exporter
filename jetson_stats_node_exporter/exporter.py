@@ -134,7 +134,7 @@ class JetsonExporter(object):
     def __integrated_power_machine_parts(self):
         power_gauge = GaugeMetricFamily(
             name="integrated_power",
-            documentation="Power Statistics from internal power sensors (unit: mW/V/A)",
+            documentation="Power Statistics from internal power sensors (unit: mW/mV/mA)",
             labels=["statistic", "machine_part", "system_critical"]
         )
 
