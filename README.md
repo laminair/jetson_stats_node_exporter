@@ -74,5 +74,23 @@ WantedBy=multi-user.target
 Then run `sudo systemctl start jetson-stats-node-exporter`. 
 To check if the service is alive `sudo systemctl status jetson-stats-node-exporter`
 
+### Creating a docker image
+The node exporter can be wrapped in a docker image and can be run via docker.
+If you use docker compose you can build the image directly via docker compose.
+Place the Dockerfile in the same directory as your docker-compose.yaml, 
+or use the context option in your docker-compose.yaml to specify the folder containing the Dockerfile.
+```
+  jetson_stats_node_exporter:
+    build:
+      context: ./custom_images
+      dockerfile: Dockerfile_jetson_stats_exporter
+    container_name: hsos_jetson_stats_node_exporter
+    restart: always
+    ports:
+      - "9100:9100"  # Map internal port 9100 to a different external port 9100
+    volumes:
+      - /run/jtop.sock:/run/jtop.sock
+```
+
 ## Credits
 This project is based on https://github.com/lipovsek/jetson_prometheus_exporter, which uses tegrastats.
