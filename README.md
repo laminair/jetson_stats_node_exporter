@@ -1,4 +1,4 @@
-# Nvidia Jetson Prometheus Node Exporter (incl. GPU) - now including AGX Orin platform with JetPack 6.0
+# Nvidia Jetson Prometheus Node Exporter (incl. GPU) - incl. JetPack 6.0
 
 This project contains a node exporter variation building on jetson-stats (jtop) rather than tegrastats directly.
 We export the following metrics: 
@@ -19,16 +19,16 @@ You can either clone this repo or use pip for installation.
 Wheels or binaries are provided here: [Jetson Stats Node Exporter Releases](https://github.com/laminair/jetson_stats_node_exporter/releases)
 
 ### Easy Installation via PyPi
-
+Make sure your local installation of jetson-stats is 4.2.9. Otherwise, you will run into dependency issues.
 ```
-pip install jetson-stats-node-exporter==0.0.6
+pip install jetson-stats-node-exporter==0.1.0
 ```
 
 ### Install from git
 
 Installation with pip (no venv or conda due to jetson-stats dependency!): 
 ```
-> export JSN_RELEASE="0.0.6"
+> export JSN_RELEASE="0.1.0"
 > sudo -H pip3 install -U https://github.com/laminair/jetson_stats_node_exporter/releases/download/$JSN_RELEASE/jetson_stats_node_exporter-$JSN_RELEASE-py3-none-any.whl
 ```
 
