@@ -10,7 +10,7 @@ setuptools.setup(
       license="GNU GPL",
       packages=["jetson_stats_node_exporter"],
       install_requires=[
-            "jetson-stats==4.2.6",
+            "jetson-stats==4.2.9",
             "schedule==1.0.0",
             "prometheus-client==0.15.0",
             "psutil==5.9.4",
