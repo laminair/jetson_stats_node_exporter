@@ -90,6 +90,12 @@ or use the context option in your docker-compose.yaml to specify the folder cont
       - "9100:9100"  # Map internal port 9100 to a different external port 9100
     volumes:
       - /run/jtop.sock:/run/jtop.sock
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:9100/metrics"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
 ```
 
 ## Credits
