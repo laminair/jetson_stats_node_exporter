@@ -1,4 +1,4 @@
-jetson-stats==4.2.9
+jetson-stats==4.3.1
 schedule==0.6.0
-prometheus-client==0.7.1
-psutil==5.6.7
+prometheus-client==0.21.1
+psutil

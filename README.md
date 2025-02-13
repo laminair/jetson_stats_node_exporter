@@ -21,14 +21,14 @@ Wheels or binaries are provided here: [Jetson Stats Node Exporter Releases](http
 ### Easy Installation via PyPi
 Make sure your local installation of jetson-stats is 4.2.9. Otherwise, you will run into dependency issues.
 ```
-pip install jetson-stats-node-exporter==0.1.0
+pip install jetson-stats-node-exporter==0.1.1
 ```
 
 ### Install from git
 
 Installation with pip (no venv or conda due to jetson-stats dependency!): 
 ```
-> export JSN_RELEASE="0.1.0"
+> export JSN_RELEASE="0.1.1"
 > sudo -H pip3 install -U https://github.com/laminair/jetson_stats_node_exporter/releases/download/$JSN_RELEASE/jetson_stats_node_exporter-$JSN_RELEASE-py3-none-any.whl
 ```
 
@@ -82,9 +82,9 @@ or use the context option in your docker-compose.yaml to specify the folder cont
 ```
   jetson_stats_node_exporter:
     build:
-      context: ./custom_images
-      dockerfile: Dockerfile_jetson_stats_exporter
-    container_name: hsos_jetson_stats_node_exporter
+      context: <PATH_TO_JETSON_STATS_NODE_EXPORTER_PACKAGE>
+      dockerfile: Dockerfile
+    container_name: jetson_stats_node_exporter
     restart: always
     ports:
       - "9100:9100"  # Map internal port 9100 to a different external port 9100
@@ -97,6 +97,10 @@ or use the context option in your docker-compose.yaml to specify the folder cont
       retries: 10
       start_period: 60s
 ```
+
+**Important Note:** 
+When using docker, you may not be able to export disk statistics. 
+Please see [this GitHub issue](https://github.com/laminair/jetson_stats_node_exporter/issues/7).
 
 ## Credits
 This project is based on https://github.com/lipovsek/jetson_prometheus_exporter, which uses tegrastats.
