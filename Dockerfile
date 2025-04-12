@@ -26,4 +26,6 @@ RUN pip3 install -U https://github.com/laminair/jetson_stats_node_exporter/archi
 
 
 # Set the start command
-CMD ["python3", "-m", "jetson_stats_node_exporter"]
+ENTRYPOINT ["python3", "-m", "jetson_stats_node_exporter"]
+
+CMD []
