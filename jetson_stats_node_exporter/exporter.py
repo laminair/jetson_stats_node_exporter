@@ -36,10 +36,11 @@ class JetsonExporter(object):
         )
 
         for core_number, core_data in enumerate(self.jetson.jtop_stats["cpu"]["cpu"]):
-            cpu_gauge.add_metric([str(core_number), "freq"], value=core_data["freq"]["cur"])
-            cpu_gauge.add_metric([str(core_number), "min_freq"], value=core_data["freq"]["min"])
-            cpu_gauge.add_metric([str(core_number), "max_freq"], value=core_data["freq"]["max"])
-            cpu_gauge.add_metric([str(core_number), "val"], value=core_data["idle"])
+            if core_data["online"]:
+                cpu_gauge.add_metric([str(core_number), "freq"], value=core_data["freq"]["cur"])
+                cpu_gauge.add_metric([str(core_number), "min_freq"], value=core_data["freq"]["min"])
+                cpu_gauge.add_metric([str(core_number), "max_freq"], value=core_data["freq"]["max"])
+                cpu_gauge.add_metric([str(core_number), "val"], value=core_data["idle"])
         return cpu_gauge
 
     def __gpu(self):
