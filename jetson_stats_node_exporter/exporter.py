@@ -139,11 +139,11 @@ class JetsonExporter(object):
         )
 
         for part, reading in self.jetson.jtop_stats["pwr"]["rail"].items():
-            power_gauge.add_metric(["voltage"], value=reading["volt"])
-            power_gauge.add_metric(["current"], value=reading["curr"])
-            power_gauge.add_metric(["critical"], value=reading["warn"])
-            power_gauge.add_metric(["power"], value=reading["power"])
-            power_gauge.add_metric(["avg_power"], value=reading["avg"])
+            power_gauge.add_metric(["voltage", part], value=reading["volt"])
+            power_gauge.add_metric(["current", part], value=reading["curr"])
+            power_gauge.add_metric(["critical", part], value=reading["warn"])
+            power_gauge.add_metric(["power", part], value=reading["power"])
+            power_gauge.add_metric(["avg_power", part], value=reading["avg"])
 
         return power_gauge
 
