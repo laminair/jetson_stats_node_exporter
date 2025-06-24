@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
       name='jetson_stats_node_exporter',
-      version='0.1.1',
+      version='0.1.2',
       description='Prometheus Node Exporter for Nvidia Jetson Devices running Jetson Stats (now including AGX Orin with JetPack 6.0) ',
       author='HW.',
       author_email='herbert.woisetschlaeger@tum.de',
