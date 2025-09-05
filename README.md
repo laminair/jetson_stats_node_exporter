@@ -19,7 +19,7 @@ You can either clone this repo or use pip for installation.
 Wheels or binaries are provided here: [Jetson Stats Node Exporter Releases](https://github.com/laminair/jetson_stats_node_exporter/releases)
 
 ### Easy Installation via PyPi
-Make sure your local installation of jetson-stats is 4.2.9. Otherwise, you will run into dependency issues.
+Make sure your local installation of jetson-stats is 4.3.2. Otherwise, you will run into dependency issues.
 ```
 pip install jetson-stats-node-exporter==0.1.3
 ```
@@ -39,6 +39,8 @@ Manual installation (may require sudo privileges due to jetson-stats dependency)
 > cd jetson_stats_node_exporter
 > uv sync
 ```
+
+**Note:** This project used [uv](https://docs.astral.sh/uv/) for dependency management.
 
 ## Running the exporter
 After installation the project is available as python module. Run it as follows:
