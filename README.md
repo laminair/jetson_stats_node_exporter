@@ -21,14 +21,14 @@ Wheels or binaries are provided here: [Jetson Stats Node Exporter Releases](http
 ### Easy Installation via PyPi
 Make sure your local installation of jetson-stats is 4.2.9. Otherwise, you will run into dependency issues.
 ```
-pip install jetson-stats-node-exporter==0.1.1
+pip install jetson-stats-node-exporter==0.1.3
 ```
 
 ### Install from git
 
 Installation with pip (no venv or conda due to jetson-stats dependency!): 
 ```
-> export JSN_RELEASE="0.1.1"
+> export JSN_RELEASE="0.1.3"
 > sudo -H pip3 install -U https://github.com/laminair/jetson_stats_node_exporter/releases/download/$JSN_RELEASE/jetson_stats_node_exporter-$JSN_RELEASE-py3-none-any.whl
 ```
 
@@ -37,7 +37,7 @@ Manual installation (may require sudo privileges due to jetson-stats dependency)
 ```
 > git clone https://github.com/laminair/jetson_stats_node_exporter.git
 > cd jetson_stats_node_exporter
-> python3 setup.py install
+> uv sync
 ```
 
 ## Running the exporter
