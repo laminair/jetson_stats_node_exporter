@@ -40,7 +40,7 @@ Manual installation (may require sudo privileges due to jetson-stats dependency)
 > uv sync
 ```
 
-**Note:** This project used [uv](https://docs.astral.sh/uv/) for dependency management.
+**Note:** This project uses [uv](https://docs.astral.sh/uv/) for dependency management.
 
 ## Running the exporter
 After installation the project is available as python module. Run it as follows:
