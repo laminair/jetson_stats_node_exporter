@@ -1,0 +1,34 @@
+---
+version: 3
+
+env:
+  IMAGE_NAME: node-exporter-jetson
+  CONTAINER_NAME: node-exporter-jetson
+
+tasks:
+  build:
+    run: once
+    cmds:
+      - docker build -t $IMAGE_NAME .
+  build-and-push:
+    deps: [build]
+    cmds:
+      - docker push $IMAGE_NAME
+  run:
+    run: once
+    cmds:
+      - task: stop
+      - docker run 
+          --gpus all --rm -d --runtime nvidia 
+          -p 9100:9100 
+          -v /run/jtop.sock:/run/jtop.sock 
+          --name $CONTAINER_NAME
+          $IMAGE_NAME
+  stop:
+    run: once
+    cmds:
+      - docker container rm -f $CONTAINER_NAME || true
+  query:
+    run: once
+    cmds:
+      - curl http://localhost:9100/metrics

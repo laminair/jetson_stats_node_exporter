@@ -1,0 +1,53 @@
+---
+name: Build And Push
+
+on:
+  workflow_call:
+    inputs:
+      release:
+        required: false
+        type: boolean
+        default: false
+      version:
+        required: false
+        type: string
+        default: ''
+
+env:
+  SERVER_MAGE_URI: 565688099982.dkr.ecr.eu-west-1.amazonaws.com/node-exporter-jetson
+
+jobs:
+  build_and_push:
+    runs-on: [self-hosted, jetpack-5.1.2]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Install Task
+        uses: arduino/setup-task@v1
+        with:
+          version: 3.x
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Build and push image
+        run: task build-and-push
+        env:
+          IMAGE_NAME: ${{ env.SERVER_MAGE_URI }}:git-sha-${{ github.sha }}
+        if: inputs.release == false
+
+      - name: Build and push release image
+        run: task server:build-and-push
+        env:
+          IMAGE_NAME: ${{ env.SERVER_MAGE_URI }}:${{ inputs.version }}
+        if: inputs.release == true

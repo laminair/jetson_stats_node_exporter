@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y gcc python3-dev curl && apt-get clean &
 # Define build argument for the version
 # --> Insert the correct version you want to install and which fits your system requirements. Especially the compatibility with jetson-stats (jtop)
 ARG JSN_RELEASE="0.1.3"
+# working ="0.1.1" with jetson-stats==4.3.2 --> install with sudo pip install jetson-stats==4.3.2
 # working ="0.1.0" with jetson-stats==4.2.9 --> install with sudo pip install jetson-stats==4.2.9
 # working ="0.0.6" with jetson-stats==4.2.6
 # check version with jtop --version

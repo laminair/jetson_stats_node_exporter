@@ -1,0 +1,57 @@
+---
+name: CD
+
+on:
+  push:
+    paths:
+      - .github/**
+    branches:
+      - main
+
+
+jobs:
+  release:
+    runs-on: [self-hosted, jetpack-5.1.2]
+    outputs:
+      version: ${{ steps.get_version.outputs.VERSION }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Extract latest version from CHANGELOG.md
+        id: get_version
+        run: |
+          VERSION=$(grep -m1 -oE '^## \[[0-9]+\.[0-9]+\.[0-9]+\]' CHANGELOG.md | awk -F'[][]' '{print $2}')
+          if [[ -z "$VERSION" ]]; then
+            echo "❌ Version not found in CHANGELOG.md"
+            exit 1
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "::set-output name=VERSION::$VERSION"
+          echo "Found version: $VERSION"
+
+      - name: Extract changelog content for latest version
+        id: get_changelog
+        run: |
+          awk '/^## \[[0-9]+\.[0-9]+\.[0-9]+\]/{i++} i==1' CHANGELOG.md | tail -n +2 > RELEASE_NOTES.md
+          echo "Extracted changelog notes for version ${{ env.VERSION }}"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.VERSION }}
+          name: Release ${{ env.VERSION }}
+          body_path: RELEASE_NOTES.md
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build_and_push:
+    name: Build and push
+    needs: [release]  # Aspetta il job release per ottenere la versione
+    uses: ./.github/workflows/reusables_build_and_push.yml
+    with:
+      release: true
+      version: ${{ needs.release.outputs.version }}  # Passiamo la versione della release!
+    secrets: inherit

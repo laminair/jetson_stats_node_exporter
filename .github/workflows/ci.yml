@@ -1,0 +1,19 @@
+---
+name: CI
+
+on:
+  push:
+    paths:
+      - .github/**
+    branches: [develop]
+  pull_request:
+    paths:
+      - .github/**
+    branches: [develop]
+
+
+jobs:
+  build_and_push_dev:
+    name: Build and push
+    uses: ./.github/workflows/reusables_build_and_push.yml
+    secrets: inherit
