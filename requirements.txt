@@ -1,4 +1,4 @@
-jetson-stats==4.3.1
+jetson-stats==4.3.2
 schedule==0.6.0
 prometheus-client==0.21.1
 psutil

@@ -138,13 +138,13 @@ class JetsonExporter(object):
             documentation="Power Statistics from internal power sensors (unit: mW/mV/mA)",
             labels=["statistic", "machine_part", "system_critical"]
         )
-
-        for part, reading in self.jetson.jtop_stats["pwr"]["rail"].items():
-            power_gauge.add_metric(["voltage", part], value=reading["volt"])
-            power_gauge.add_metric(["current", part], value=reading["curr"])
-            power_gauge.add_metric(["critical", part], value=reading["warn"])
-            power_gauge.add_metric(["power", part], value=reading["power"])
-            power_gauge.add_metric(["avg_power", part], value=reading["avg"])
+        if "rail" in self.jetson.jtop_stats["pwr"]:
+            for part, reading in self.jetson.jtop_stats["pwr"]["rail"].items():
+                power_gauge.add_metric(["voltage", part], value=reading["volt"])
+                power_gauge.add_metric(["current", part], value=reading["curr"])
+                power_gauge.add_metric(["critical", part], value=reading["warn"])
+                power_gauge.add_metric(["power", part], value=reading["power"])
+                power_gauge.add_metric(["avg_power", part], value=reading["avg"])
 
         return power_gauge
 
@@ -156,8 +156,9 @@ class JetsonExporter(object):
             unit="mW"
         )
 
-        power_gauge.add_metric(["power"], value=self.jetson.jtop_stats["pwr"]["tot"]["power"])
-        power_gauge.add_metric(["avg_power"], value=self.jetson.jtop_stats["pwr"]["tot"]["avg"])
+        if "rail" in self.jetson.jtop_stats["pwr"]:
+            power_gauge.add_metric(["power"], value=self.jetson.jtop_stats["pwr"]["tot"]["power"])
+            power_gauge.add_metric(["avg_power"], value=self.jetson.jtop_stats["pwr"]["tot"]["avg"])
 
         return power_gauge
 
